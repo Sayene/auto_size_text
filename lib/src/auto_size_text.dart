@@ -29,6 +29,7 @@ class AutoSizeText extends StatefulWidget {
     this.wrapWords = true,
     this.overflow,
     this.overflowReplacement,
+    this.onOverflow,
     this.textScaleFactor,
     this.maxLines,
     this.semanticsLabel,
@@ -54,6 +55,7 @@ class AutoSizeText extends StatefulWidget {
     this.wrapWords = true,
     this.overflow,
     this.overflowReplacement,
+    this.onOverflow,
     this.textScaleFactor,
     this.maxLines,
     this.semanticsLabel,
@@ -215,6 +217,11 @@ class AutoSizeText extends StatefulWidget {
   /// ```
   final String? semanticsLabel;
 
+  /// sayene: onOverflow optional callback - called when content overflows
+  ///
+
+  final Function()? onOverflow;
+
   @override
   _AutoSizeTextState createState() => _AutoSizeTextState();
 }
@@ -266,6 +273,11 @@ class _AutoSizeTextState extends State<AutoSizeText> {
       } else {
         text = _buildText(fontSize, style, maxLines);
       }
+
+      if(widget.onOverflow != null && !textFits){
+        widget.onOverflow?.call();
+      }
+      
 
       if (widget.overflowReplacement != null && !textFits) {
         return widget.overflowReplacement!;

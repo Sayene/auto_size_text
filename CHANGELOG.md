@@ -1,3 +1,7 @@
+
+## 3.0.1
+- added onOverflow callback
+
 ## 3.0.0
 - Upgraded to null safety
 
